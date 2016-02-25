@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context"
+  xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+
+  <!-- 读取jdbc.properties配置文件 -->
+  <context:property-placeholder location="classpath:properties/dev.properties" />
+
+  <!-- JOTM实例 -->
+  <!-- <bean id="jotm" class="org.springframework.transaction.jta.JotmFactoryBean"> -->
+  <!-- <property name="defaultTimeout" value="500000" /> -->
+  <!-- </bean> -->
+
+  <!--配置数据源 -->
+  <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close" p:driverClassName="${mysql.driverClassName}"
+    p:url="${mysql.url.upsmart}" p:username="${mysql.username.upsmart}" p:password="${mysql.password.upsmart}"
+    p:maxIdle="${mysql.maxIdle}" p:maxActive="${mysql.maxActive}" p:defaultAutoCommit="${mysql.defaultAutoCommit}"
+    p:timeBetweenEvictionRunsMillis="${mysql.timeBetweenEvictionRunsMillis}" p:minEvictableIdleTimeMillis="${mysql.minEvictableIdleTimeMillis}" />
+
+  <!-- 采用注解方式来配置事务。针对数据源的事务管理器 ，把我们定义的数据源注入到DataSourceTransactionManager类的属性dataSource中 -->
+  <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+    <property name="dataSource" ref="dataSource" />
+  </bean>
+  <!-- 引入命名空间： 1.xmlns:tx="http://www.springframework.org/schema/tx 2.http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd 
+    采用@Transaction注解方式使用事务管理器 -->
+  <tx:annotation-driven transaction-manager="txManager" />
+
+  <!-- 配置业务bean：PersonServiceBean -->
+  <bean id="personServiceImpl" class="com.upsmart.PersonServiceImpl">
+    <!-- 向属性dataSource注入数据源 -->
+    <property name="dataSource" ref="dataSource"></property>
+  </bean>
+</beans>
