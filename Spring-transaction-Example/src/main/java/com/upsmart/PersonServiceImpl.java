@@ -6,6 +6,7 @@ import javax.sql.DataSource;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Title:PersonServiceImpl.java <br>
@@ -31,11 +32,12 @@ public class PersonServiceImpl {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
-    public int save(Person person) {
-        int row = jdbcTemplate.update("insert into person(name,age,address)values(?,?,?)",
-                new Object[] { person.getName(), person.getAge(), person.getAddress() }, new int[] {
-                        java.sql.Types.VARCHAR, java.sql.Types.INTEGER, java.sql.Types.VARCHAR });
-        return row;
+    @Transactional
+    public void save(Person person) {
+        jdbcTemplate.update("insert into person(name,age,address)values(?,?,?)", new Object[] { person.getName(),
+                person.getAge(), person.getAddress() }, new int[] { java.sql.Types.VARCHAR, java.sql.Types.INTEGER,
+                java.sql.Types.VARCHAR });
+        throw new RuntimeException("Test");
     }
 
     public void update(Person person) {

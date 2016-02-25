@@ -22,12 +22,13 @@
     p:maxIdle="${mysql.maxIdle}" p:maxActive="${mysql.maxActive}" p:defaultAutoCommit="${mysql.defaultAutoCommit}"
     p:timeBetweenEvictionRunsMillis="${mysql.timeBetweenEvictionRunsMillis}" p:minEvictableIdleTimeMillis="${mysql.minEvictableIdleTimeMillis}" />
 
-  <!-- 采用注解方式来配置事务。针对数据源的事务管理器 ，把我们定义的数据源注入到DataSourceTransactionManager类的属性dataSource中 -->
-  <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-    <property name="dataSource" ref="dataSource" />
+  <!-- 定义JdbcTemplate的Bean -->
+  <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate" p:dataSource-ref="dataSource">
   </bean>
-  <!-- 引入命名空间： 1.xmlns:tx="http://www.springframework.org/schema/tx 2.http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd 
-    采用@Transaction注解方式使用事务管理器 -->
+  <!-- 配置事务管理器 -->
+  <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager" p:dataSource-ref="dataSource">
+  </bean>
+  <!-- enables scanning for @Transactional annotations -->
   <tx:annotation-driven transaction-manager="txManager" />
 
   <!-- 配置业务bean：PersonServiceBean -->
@@ -35,4 +36,5 @@
     <!-- 向属性dataSource注入数据源 -->
     <property name="dataSource" ref="dataSource"></property>
   </bean>
+
 </beans>

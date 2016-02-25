@@ -25,18 +25,17 @@ public class MainTest {
         mainTest.test();
     }
 
-    @Transactional(rollbackFor = { RuntimeException.class })
     public void test() {
         ApplicationContext mySqlContext = new ClassPathXmlApplicationContext("config/jpa.xml");
         ApplicationContext mongoContext = new ClassPathXmlApplicationContext("config/mongo.xml");
 
         PersonServiceImpl mySqlBean = (PersonServiceImpl) mySqlContext.getBean("personServiceImpl");
         PersonRepository mongoBean = (PersonRepository) mongoContext.getBean("personRepository");
+
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Person person = new Person("Test", 18, dateFormat.format(new Date()));
-        int row = mySqlBean.save(person);
-        System.out.println("row>" + row);
         mongoBean.insert(person);
-        throw new RuntimeException("Test");
+        mySqlBean.save(person);
+
     }
 }

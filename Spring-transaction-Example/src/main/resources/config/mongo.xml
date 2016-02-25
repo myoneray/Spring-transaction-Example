@@ -28,4 +28,5 @@
   <bean id="personRepository" class="com.upsmart.PersonRepository">
     <property name="mongoTemplate" ref="mongoTemplate"></property>
   </bean>
+  
 </beans>

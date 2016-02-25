@@ -6,10 +6,25 @@ import java.util.regex.Pattern;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+@Service
 public class PersonRepository implements AbstractRepository {
 
     private MongoTemplate mongoTemplate;
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see com.mongo.dao.AbstractRepository#insert(com.mongo.bean.Person)
+     */
+    @Transactional
+    public void insert(Person person) {
+        // TODO Auto-generated method stub
+        getMongoTemplate().insert(person);
+        throw new RuntimeException("Test");
+    }
 
     /*
      * (non-Javadoc)
@@ -61,16 +76,6 @@ public class PersonRepository implements AbstractRepository {
         // TODO Auto-generated method stub
         return getMongoTemplate().findOne(new Query(Criteria.where("id").is(id)), Person.class);
 
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.mongo.dao.AbstractRepository#insert(com.mongo.bean.Person)
-     */
-    public void insert(Person person) {
-        // TODO Auto-generated method stub
-        getMongoTemplate().insert(person);
     }
 
     /*
