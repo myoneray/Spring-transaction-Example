@@ -1,7 +1,9 @@
-package com.upsmart;
+package com.upsmart.mongo;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import com.upsmart.Person;
 
 public class MongoTest {
 

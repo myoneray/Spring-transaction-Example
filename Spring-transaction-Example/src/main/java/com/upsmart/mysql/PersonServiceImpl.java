@@ -1,4 +1,4 @@
-package com.upsmart;
+package com.upsmart.mysql;
 
 import java.util.List;
 
@@ -7,6 +7,9 @@ import javax.sql.DataSource;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.upsmart.Person;
+import com.upsmart.mongo.PersonRowMapper;
 
 /**
  * Title:PersonServiceImpl.java <br>
@@ -37,7 +40,6 @@ public class PersonServiceImpl {
         jdbcTemplate.update("insert into person(name,age,address)values(?,?,?)", new Object[] { person.getName(),
                 person.getAge(), person.getAddress() }, new int[] { java.sql.Types.VARCHAR, java.sql.Types.INTEGER,
                 java.sql.Types.VARCHAR });
-        throw new RuntimeException("Test");
     }
 
     public void update(Person person) {

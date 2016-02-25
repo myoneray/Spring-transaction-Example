@@ -1,13 +1,14 @@
 package com.upsmart;
 
-import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+
+import com.upsmart.mongo.PersonRepository;
+import com.upsmart.mysql.PersonServiceImpl;
 
 /**
  * Title:MainTest.java <br>

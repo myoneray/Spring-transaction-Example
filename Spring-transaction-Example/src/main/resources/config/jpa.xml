@@ -32,7 +32,7 @@
   <tx:annotation-driven transaction-manager="txManager" />
 
   <!-- 配置业务bean：PersonServiceBean -->
-  <bean id="personServiceImpl" class="com.upsmart.PersonServiceImpl">
+  <bean id="personServiceImpl" class="com.upsmart.mysql.PersonServiceImpl">
     <!-- 向属性dataSource注入数据源 -->
     <property name="dataSource" ref="dataSource"></property>
   </bean>

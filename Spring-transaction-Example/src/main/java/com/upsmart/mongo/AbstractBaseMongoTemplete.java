@@ -1,4 +1,4 @@
-package com.upsmart;
+package com.upsmart.mongo;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanNameAware;

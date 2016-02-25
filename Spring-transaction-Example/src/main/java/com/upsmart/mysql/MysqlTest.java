@@ -1,7 +1,9 @@
-package com.upsmart;
+package com.upsmart.mysql;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import com.upsmart.Person;
 
 /**
  * Title:MysqlTest.java <br>
@@ -19,7 +21,7 @@ public class MysqlTest {
         person.setName("wangmingTest");
         person.setAge(18);
         // 保存一条记录
-        System.out.println(personService.save(person));
+        personService.save(person);
     }
 
 }

@@ -1,4 +1,4 @@
-package com.upsmart;
+package com.upsmart.mongo;
 
 import java.util.List;
 import java.util.regex.Pattern;
@@ -8,6 +8,8 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.upsmart.Person;
 
 @Service
 public class PersonRepository implements AbstractRepository {
@@ -23,7 +25,6 @@ public class PersonRepository implements AbstractRepository {
     public void insert(Person person) {
         // TODO Auto-generated method stub
         getMongoTemplate().insert(person);
-        throw new RuntimeException("Test");
     }
 
     /*

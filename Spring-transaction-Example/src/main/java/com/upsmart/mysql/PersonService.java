@@ -1,6 +1,8 @@
-package com.upsmart;
+package com.upsmart.mysql;
 
 import java.util.List;
+
+import com.upsmart.Person;
 
 /**
  * Title:PersonService.java <br>

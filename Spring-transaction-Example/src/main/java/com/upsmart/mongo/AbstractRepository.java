@@ -1,6 +1,8 @@
-package com.upsmart;
+package com.upsmart.mongo;
 
 import java.util.List;
+
+import com.upsmart.Person;
 
 /**
  * Title:AbstractRepository.java <br>
