@@ -9,7 +9,8 @@ import com.upsmart.Person;
 
 public class PersonRowMapper implements RowMapper {
     public Object mapRow(ResultSet set, int index) throws SQLException {
-        Person person = new Person(set.getString("name"), set.getInt("age"), set.getString("address"));
+        System.out.println("index:"+index);
+        Person person = new Person(set.getInt("id"), set.getString("name"), set.getInt("age"), set.getString("address"));
         return person;
     }
 }

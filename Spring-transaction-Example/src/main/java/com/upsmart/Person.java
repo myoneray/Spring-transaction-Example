@@ -1,7 +1,5 @@
 package com.upsmart;
 
-import java.io.Serializable;
-
 /**
  * Title:Persion.java <br>
  * Description:Persion
@@ -11,10 +9,29 @@ import java.io.Serializable;
  */
 public class Person {
 
+    private Integer id;
     private String name;
     private Integer age;
     private String address;
     private String department;
+
+    /**
+     * 获取id
+     * 
+     * @return id
+     */
+    public Integer getId() {
+        return id;
+    }
+
+    /**
+     * 设置id
+     * 
+     * @param id
+     */
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     /**
      * 获取department
@@ -34,7 +51,27 @@ public class Person {
         this.department = department;
     }
 
-    public Person(String name, int age, String address) {
+    public Person(Integer id, String name, Integer age, String address, String department) {
+        super();
+        this.id = id;
+        this.name = name;
+        this.age = age;
+        this.address = address;
+        this.department = department;
+    }
+
+    public Person(Integer id) {
+        super();
+        this.id = id;
+    }
+
+    public Person(Integer id, String name, Integer age, String address) {
+        this.name = name;
+        this.age = age;
+        this.address = address;
+    }
+
+    public Person(String name, Integer age, String address) {
         this.name = name;
         this.age = age;
         this.address = address;
@@ -96,6 +133,17 @@ public class Person {
      */
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return "Person [id=" + id + ", name=" + name + ", age=" + age + ", address=" + address + ", department="
+                + department + "]";
     }
 
 }

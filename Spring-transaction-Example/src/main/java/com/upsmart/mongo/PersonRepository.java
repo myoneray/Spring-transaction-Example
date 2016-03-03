@@ -21,7 +21,6 @@ public class PersonRepository implements AbstractRepository {
      * 
      * @see com.mongo.dao.AbstractRepository#insert(com.mongo.bean.Person)
      */
-    @Transactional
     public void insert(Person person) {
         // TODO Auto-generated method stub
         getMongoTemplate().insert(person);
